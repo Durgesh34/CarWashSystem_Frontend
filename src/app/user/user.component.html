@@ -1,0 +1,26 @@
+<cws-adminpage></cws-adminpage>
+<div class="container my-5">
+
+    <h1 class="mb-3"> Users </h1>
+<table class="table" *ngIf="users && users.length >0">
+<thead>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Role</th>
+        <th>Actions</th>
+    </tr>
+</thead>
+    <tbody *ngFor="let user of users">
+        <tr *ngIf="user.role=='Customer'">
+            <td> {{user.fullName}} </td>
+            <td> {{user.email}}</td>
+            <td>{{user.address}}</td>
+            <td> {{user.role}}</td>
+            <a type="button" class="btn btn-danger" (click)="deleteuser(user?.id)">Delete</a>
+        </tr>
+    </tbody>
+</table>
+<p *ngIf="!users || users.length <=0" class="text-center h3">No Users found</p>
+</div>

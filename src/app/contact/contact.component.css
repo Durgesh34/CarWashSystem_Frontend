@@ -1,0 +1,13 @@
+.contact-container {
+    display: flex;
+    align-items: center;
+}
+
+video {
+    width: 50%;
+}
+
+aside {
+    width: 50%;
+    padding: 20px;
+}

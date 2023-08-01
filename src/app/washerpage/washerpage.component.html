@@ -1,0 +1,55 @@
+<cws-nav></cws-nav>
+<p *ngIf="!packages || packages.length <= 0">NO PACKAGES FOUND</p>
+
+<div class="row">
+  <div class="col-md-4 col-sm-6" *ngFor="let package of packages">
+    <div class="pricing-table-3 premium">
+      <div class="pricing-table-header">
+        <h4><strong>{{ package.name }}</strong></h4>
+      </div>
+      <div class="price"><strong>{{ package.price }}</strong> / service</div>
+      <div class="pricing-body">
+        {{ package.description }}<br>
+        <button (click)="addToCart(package)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+<h4 style="text-align: center; font-weight: 700;background-color:beige;">Cart</h4>
+<hr>
+<div class="row">
+    <!-- Existing code -->
+  
+    <div class="row">
+        <!-- Existing code -->
+      
+        <div class="col-md-12">
+          <h4>Cart</h4>
+          <table class="cart-table">
+            <thead>
+              <tr>
+                <th>Package Name</th>
+                <th>Package Price</th>
+                <th></th> <!-- New column for remove button -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let package of cart2">
+                <td>{{ package.name }}</td>
+                <td>{{ package.price }}</td>
+                <td>
+                  <button (click)="removeFromCart(package)" class="btn btn-danger">Remove</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="total-price" style="margin-bottom: 30px;">Total Price: {{ totalPrice }}Rs</p>
+              <br>
+          <span><a routerLink="/order"><button style="padding: 2px;">Order</button></a></span>
+
+        </div>
+      </div>
+      
+      

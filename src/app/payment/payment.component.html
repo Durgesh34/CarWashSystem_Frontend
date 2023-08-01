@@ -1,0 +1,75 @@
+<cws-nav></cws-nav>
+<!-- payment-form.component.html -->
+<form #form="ngForm" (ngSubmit)="Addpayment()">
+
+<div *ngIf="!isAdmin">
+<div class="container mt-5">
+    <h1>Payment</h1>
+    
+      
+      <h2>Payment Information</h2>
+      <div class="form-group">
+        <label for="cardType">Card Type:</label>
+        <select name="cardType" class="form-control">
+          <option value="">--Select card Type--</option>
+          <option value="visa" [(ngModel)]="pay.cardType" >Visa</option>
+          <option value="rupay" [(ngModel)]="pay.cardType">Rupay</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="cardNumber">Card Number:*</label>
+        <input type="number" name="cardNumber" class="form-control" [(ngModel)]="pay.cardNumber" required>
+      </div>
+      <div class="form-group">
+        <label for="expiryDate">Expiry date:*</label>
+        <input type="date" name="expiryDate" class="form-control" [(ngModel)]="pay.expiryDate" required>
+      </div>
+      <div class="form-group">
+        <label for="cvv">CVV:</label>
+        <input type="number" name="cvv" class="form-control" [(ngModel)]="pay.cvv" required >
+      </div>
+      <div class="form-group">
+        <label for="price">Amount:</label>
+        <input type="number"id="price" name="price" class="form-control" [(ngModel)]="pay.totalAmount"  >
+      </div>
+      <button type="submit" class="btn btn-primary tex">Submit</button>
+    
+  </div>
+</div>
+</form>
+
+<!-- For Admin -->
+<div *ngIf="isAdmin">
+  <h3>All Orders</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Date</th>
+        <th>Location</th>
+        <th>Amount</th>
+        <th>Car Model</th>
+        <th>Car Number</th>
+        <th>Customer UserId</th>
+        <th>Delete Order</th>
+        <th>name</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pay of payments">
+        <td>{{ pay.id }}</td>
+        <td>{{ pay.expiryDate | date }}</td>
+        <td>{{ pay.cardNumber}}</td>
+        <td>{{ pay.totalAmount}}</td>
+        <td>{{ pay.cardType }}</td>
+        <td>{{ pay.cvv }}</td>
+        <td>{{ pay.userId }}</td>
+        <td>{{ pay.cardHolderName}}</td>
+        
+        <td><button class="btn-danger" *ngIf="pay.id !== undefined" (click)="deletePayment(pay.id)">delete</button></td> 
+        <!-- Delete button for each order-->
+      </tr>
+    </tbody>
+  </table>
+</div>

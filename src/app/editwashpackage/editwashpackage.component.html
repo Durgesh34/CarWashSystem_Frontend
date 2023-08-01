@@ -1,0 +1,31 @@
+<div class="container my-5">
+  <h1 class="mb-3">Edit Employee</h1>
+  <div class="row">
+      <div class="col-6">
+
+          <form #form="ngForm" (ngSubmit)="updateWashPackage()">
+              <div class="mb-3">
+                  <label for="Id" class="form-label">Id</label>
+                  <input type="text" class="form-control" id="Id" name="Id" readonly [(ngModel)]="packagedetais.id" required>
+                </div>
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" [(ngModel)]="packagedetais.name" required>
+              </div>
+              <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <input type="text" class="form-control" id="description" name="description" [(ngModel)]="packagedetais.description" required>
+              </div>
+              <div class="mb-3">
+                  <label for="price" class="form-label">Price</label>
+                  <input type="number" class="form-control" id="price" name="price" [(ngModel)]="packagedetais.price" required>
+                </div>
+              
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary tex">Submit</button>
+              </div>
+                
+            </form>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+
+
+ <cws-nav></cws-nav> 
+
+  <p *ngIf="!packages || packages.length <= 0">NO PACKAGES FOUND</p>
+  
+  <div class="row">
+    <div class="col-md-4 col-sm-6" *ngFor="let package of packages">
+      <div class="pricing-table-3 premium">
+        <div class="pricing-table-header">
+          <h4><strong>{{ package.name }}</strong></h4>
+        </div>
+        <div class="price"><strong>{{ package.price }}</strong> / service</div>
+        <div class="pricing-body">
+          {{ package.description }}<br>
+          <button (click)="deletepackage(package.id)">Delete</button>
+          
+          <a type="button" class="btn btn-primary mx-3" [routerLink]="['/washpackage','edit',package.id]">View</a>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+  

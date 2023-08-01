@@ -8,7 +8,7 @@
       "schematics": {},
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "cws",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -25,9 +25,13 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+           
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              
+            ]
           },
           "configurations": {
             "production": {
@@ -85,11 +89,14 @@
             "assets": [
               "src/favicon.ico",
               "src/assets"
-            ],
-            "styles": [
+            ], "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+             
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              
+            ]
           }
         }
       }

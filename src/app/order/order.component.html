@@ -1,0 +1,75 @@
+<cws-nav></cws-nav>
+
+<div *ngIf="!isAdmin">
+  <div class="modal-body d-flex align-items-center justify-content-center mt-20" id="margin"
+    style="border-radius: 5px;">
+    <form #form="ngForm" (ngSubmit)="Addorder()"
+      style="border: 2px solid #ccc; padding: 20px; background-color: #f9f9f9;">
+      <div class="mb-3">
+        <label for="description" class="form-label">Date</label>
+        <input type="datetime" class="form-control" id="description" name="description"
+          [(ngModel)]="addorder.scheduledatetime" required>
+      </div>
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input type="text" class="form-control" id="location" name="location" [(ngModel)]="addorder.pickUpPoint"
+          required>
+        <!-- Use the readonly attribute to prevent modification -->
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Amount</label>
+        <input type="number" class="form-control" id="price" name="price" [(ngModel)]="addorder.totalAmount" readonly
+          required>
+      </div>
+      <br>
+      <h4>Enter Car Details</h4>
+      <div class="mb-3">
+        <label for="carModel" class="form-label">CarModel</label>
+        <input type="text" class="form-control" id="carModel" name="carModel" [(ngModel)]="addorder.carModel" required>
+      </div>
+      <div class="mb-3">
+        <label for="carNumber" class="form-label">CarNumber</label>
+        <input type="text" class="form-control" id="carNumber" name="carNumber" [(ngModel)]="addorder.carNumber"
+          required>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary tex">Submit</button>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+  </div>
+</div>
+
+<div *ngIf="isAdmin">
+  <h3>All Orders</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Date</th>
+        <th>Location</th>
+        <th>Amount</th>
+        <th>Car Model</th>
+        <th>Car Number</th>
+        <th>Customer UserId</th>
+        <th>Delete Order</th>
+        <th>name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of addons">
+        <td>{{ order.id }}</td>
+        <td>{{ order.scheduledatetime | date }}</td>
+        <td>{{ order.pickUpPoint }}</td>
+        <td>{{ order.totalAmount }}</td>
+        <td>{{ order.carModel }}</td>
+        <td>{{ order.carNumber }}</td>
+        <td>{{ order.userId }}</td>
+        <td>{{ order.name }}</td>
+        <td><button class="btn-danger" *ngIf="order.id !== undefined" (click)="deleteOrder(order.id)">delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

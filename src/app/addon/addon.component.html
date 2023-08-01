@@ -1,0 +1,73 @@
+<cws-adminpage></cws-adminpage>
+
+<div class="container my-5">
+
+    <h1 class="mb-3"> Addon</h1>
+    <a class="btn btn-success" href="#" role="button" style="float: right; margin-bottom: 10px; " data-bs-toggle="modal" data-bs-target="#exampleModal">Add Addon</a>
+<table class="table" *ngIf="addons && addons.length >0 ">
+<thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Actions</th>
+    </tr>
+</thead>
+    <tbody *ngIf="addons.length">
+        <tr *ngFor="let addon of addons">
+            <td> {{addon.name}} </td>
+            <td> {{addon.description}}</td>
+            <td>{{addon.price}}</td>
+           <td>
+            <a type="button" class="btn btn-primary mx-3" [routerLink]="['/addon','edit',addon.id]">View</a>
+            <a type="button" class="btn btn-danger" (click)="deleteaddon(addon.id)">Delete</a>
+           </td>
+        </tr>
+    </tbody>
+</table>
+<p *ngIf="!addons || addons.length <=0" class="text-center h3">No Package found</p>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Washpackage</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <form #form="ngForm" (ngSubmit)="addAddons()">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="name" name="name" [(ngModel)]="addAddon.name" required>
+                </div>
+                <div class="mb-3">
+                  <label for="description" class="form-label">Description</label>
+                  <input type="text" class="form-control" id="description" name="description" [(ngModel)]="addAddon.description" required>
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="number" class="form-control" id="price" name="price" [(ngModel)]="addAddon.price" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="price" class="form-label">WashPackageId</label>
+                    <input type="number" class="form-control" id="price" name="price" [(ngModel)]="addAddon.washPackageId"required>
+                  </div>
+                
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary tex">Submit</button>
+                    <button type="button" class="btn btn-secondary mx-3" data-bs-dismiss="modal">Close</button>
+                </div>
+                  
+              </form>
+
+          
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+      </div>
+    </div>
+  </div>

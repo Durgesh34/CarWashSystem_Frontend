@@ -1,0 +1,27 @@
+
+    .nav {
+        height: 100px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #1E3C72;
+        padding: 10px;
+        color: white;
+        font-size: 18px;
+      }
+    
+      /* Style the navigation links */
+      .nav a {
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+      }
+      .nav a:hover {
+        background-color: #2A5298;
+      }
+      img{
+       height: 80px;
+      }
+    
+    
+    
