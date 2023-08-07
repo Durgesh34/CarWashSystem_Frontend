@@ -19,8 +19,8 @@ export class SignupserviceService {
   constructor(private http: HttpClient, private route: Router) {
 
   }
-  
-  isLoggedIn() {
+  //forlogin buttton
+  isLoggedIn(): boolean {
     return !!this.getAccessToken();
   }
 

@@ -2,15 +2,19 @@
     <div>
       <img src="https://img.freepik.com/free-vector/carwash-neon-word-automobile-foam-logo-neon-sign-night-bright-advertisement_1262-11848.jpg?size=626&ext=jpg&ga=GA1.1.1402036000.1683896339&semt=ais"
        alt="Carwash Logo">
+       &nbsp;
+       <span >Welcome! <b> {{userName}}</b></span>
     </div>
     <div>
-      <a routerLink="/">Home</a>
-      <a routerLink="/login">Login</a>
-      <a routerLink="/contact">Contact</a>
-      <a routerLink="/signup">signup</a>
-      <button (click)="logout()">Logout
-
-      </button>
-     
+      
+      <a *ngIf="sign.isLoggedIn()" routerLink="/">Home</a>
+      <a *ngIf="sign.isLoggedIn()  && role==='Admin' "routerLink="/admin-page">Admin panel</a>
+      <a routerLink="/about">About</a>
+      <!-- Show the login button only if the user is not logged in -->
+    <a *ngIf="!sign.isLoggedIn()" routerLink="/login">Login</a>
+      <!-- Show the signup button only if the user is not logged in -->
+    <a *ngIf="!sign.isLoggedIn()" routerLink="/signup">Signup</a>
+    <!-- Show the logout button only if the user is logged in -->
+    <button class="btn btn-danger" *ngIf="sign.isLoggedIn()" (click)="logout()">Logout</button>
   
     </div>

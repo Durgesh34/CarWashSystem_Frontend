@@ -1,50 +1,47 @@
 <cws-nav></cws-nav>
-
-<div *ngIf="!isAdmin">
-  <div class="modal-body d-flex align-items-center justify-content-center mt-20" id="margin"
-    style="border-radius: 5px;">
-    <form #form="ngForm" (ngSubmit)="Addorder()"
-      style="border: 2px solid #ccc; padding: 20px; background-color: #f9f9f9;">
-      <div class="mb-3">
-        <label for="description" class="form-label">Date</label>
-        <input type="datetime" class="form-control" id="description" name="description"
-          [(ngModel)]="addorder.scheduledatetime" required>
-      </div>
-      <div class="mb-3">
-        <label for="location" class="form-label">Location</label>
-        <input type="text" class="form-control" id="location" name="location" [(ngModel)]="addorder.pickUpPoint"
-          required>
-        <!-- Use the readonly attribute to prevent modification -->
-      </div>
-      <div class="mb-3">
-        <label for="price" class="form-label">Amount</label>
-        <input type="number" class="form-control" id="price" name="price" [(ngModel)]="addorder.totalAmount" readonly
-          required>
-      </div>
-      <br>
-      <h4>Enter Car Details</h4>
-      <div class="mb-3">
-        <label for="carModel" class="form-label">CarModel</label>
-        <input type="text" class="form-control" id="carModel" name="carModel" [(ngModel)]="addorder.carModel" required>
-      </div>
-      <div class="mb-3">
-        <label for="carNumber" class="form-label">CarNumber</label>
-        <input type="text" class="form-control" id="carNumber" name="carNumber" [(ngModel)]="addorder.carNumber"
-          required>
-      </div>
-      <div class="text-center">
-        <button type="submit" class="btn btn-primary tex">Submit</button>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
+<div class="body">
+  <!-- Form to add new orders -->
+  <div *ngIf="!isAdmin && !isWasher">
+    <div class="modal-body d-flex align-items-center justify-content-center mt-20" id="margin" style="border-radius: 5px;">
+      <form #form="ngForm" (ngSubmit)="Addorder()">
+        <h1>Order Info</h1>&nbsp;&nbsp;
+        <div class="mb-3">
+          <label for="description" class="form-label">Date</label>
+          <input type="datetime" class="form-control" id="description" name="description" [(ngModel)]="addorder.scheduledatetime" required>
+        </div>
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input type="text" class="form-control" id="location" name="location" [(ngModel)]="addorder.pickUpPoint" required>
+        </div>
+        <div class="mb-3">
+          <label for="price" class="form-label">Amount</label>
+          <input type="number" class="form-control" id="price" name="price" [(ngModel)]="addorder.totalAmount" readonly required>
+        </div>
+        <br>
+        <h4>Enter Car Details</h4>
+        <div class="mb-3">
+          <label for="carModel" class="form-label">CarModel</label>
+          <input type="text" class="form-control" id="carModel" name="carModel" [(ngModel)]="addorder.carModel" required>
+        </div>
+        <div class="mb-3">
+          <label for="carNumber" class="form-label">CarNumber</label>
+          <input type="text" class="form-control" id="carNumber" name="carNumber" [(ngModel)]="addorder.carNumber" required>
+        </div>
+        <div class="text-center">
+          <a routerLink="/payment"><button type="submit" class="btn btn-primary tex" (click)="Addorder()">Submit</button></a>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+    </div>
   </div>
 </div>
 
-<div *ngIf="isAdmin">
+<!-- Table to display all orders for admins -->
+<div *ngIf="isAdmin" class="container">
   <h3>All Orders</h3>
-  <table class="table">
-    <thead>
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
       <tr>
         <th>Id</th>
         <th>Date</th>
@@ -53,8 +50,11 @@
         <th>Car Model</th>
         <th>Car Number</th>
         <th>Customer UserId</th>
+        <th>Customer Name</th>
+        <th>washing Status:</th>
+        <th>WasherID</th>
         <th>Delete Order</th>
-        <th>name</th>
+       
       </tr>
     </thead>
     <tbody>
@@ -67,7 +67,48 @@
         <td>{{ order.carNumber }}</td>
         <td>{{ order.userId }}</td>
         <td>{{ order.name }}</td>
-        <td><button class="btn-danger" *ngIf="order.id !== undefined" (click)="deleteOrder(order.id)">delete</button>
+        <td>{{order.washingStatus}}</td>
+        <td>{{order.washerId}}</td>
+          <td><button class="btn btn-danger btn-sm" *ngIf="order.id !== undefined" (click)="deleteOrder(order.id)">delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Table to display orders for washer -->
+<!-- Table to display orders for washer -->
+<div *ngIf="isWasher" class="container">
+  <h3>Orders for Washer</h3>
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>Id</th>
+        <th>Date</th>
+        <th>Location</th>
+        <th>Amount</th>
+        <th>Car Model</th>
+        <th>Car Number</th>
+        <th>Customer UserId</th>
+        <th>Customer Name</th>
+        <th>Update Order</th>
+      
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of addons; let i = index" class="order-card" [ngClass]="{ 'approved': order.washingStatus === 'approved' && selectedOrderIndex === i, 'rejected': order.washingStatus === 'rejected' && selectedOrderIndex === i }">
+        <td>{{ order.id }}</td>
+        <td>{{ order.scheduledatetime | date }}</td>
+        <td>{{ order.pickUpPoint }}</td>
+        <td>{{ order.totalAmount }}</td>
+        <td>{{ order.carModel }}</td>
+        <td>{{ order.carNumber }}</td>
+        <td>{{ order.userId }}</td>
+        <td>{{ order.name }}</td>
+        
+        <td>
+          <button class="btn btn-success" (click)="updateOrderStatus(order, i)" [disabled]="order.washingStatus === 'approved' ">Approve</button>
+          <button class="btn btn-danger" (click)="rejectOrderStatus(order, i)" [disabled]="order.washingStatus === 'approved' || order.washingStatus ==='rejected' ">Reject</button>
         </td>
       </tr>
     </tbody>

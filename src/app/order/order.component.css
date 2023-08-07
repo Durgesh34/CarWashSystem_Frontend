@@ -1,18 +1,65 @@
 /* styles.css (or your component's CSS file) */
 
-/* styles.css (or your component's CSS file) */
-#margin{
-    margin-top: 30px;
-    border-radius: 5px;
 
-}
-.custom-form {
-    border: 2px solid #ccc;
-    padding: 20px;
-    background-color: #f9f9f9;
-    margin-top: 10px;
-    border-radius: 5px;
-    width: 600px; /* Adjust the width as needed */
+  .body{
+    background-image:url(../../assets/img/carousel-3.jpg);
+    background-size: cover ;
+    background-repeat: no-repeat;
   }
   
+  .modal-body {
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border: 2px solid #ccc;
+    background-color: #c9ba89bb;
+    max-width: 365px; /* You can adjust the max-width as per your design */
+    margin: 20px auto; /* Adjust the margin as per your design */
+  }
   
+  label{
+    color: white;
+    font-size: 25px;
+  }
+  /* Optional: Add a slightly rounded appearance to the form elements */
+  .modal-body input[type="datetime"],
+  .modal-body input[type="text"],
+  .modal-body input[type="number"],
+  .modal-body button {
+    border-radius: 3px;
+    
+    
+  }
+  
+  /* Apply focus styles */
+  .modal-body input[type="datetime"]:focus,
+  .modal-body input[type="text"]:focus,
+  .modal-body input[type="number"]:focus {
+    outline: none;
+    border: 2px solid #007bff;
+    color:black;
+  }
+  
+  /* Optional: Style the submit button */
+  .modal-body button {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .modal-body button:hover {
+    background-color: #0056b3;
+  }
+  
+
+  .approved {
+    border: 2px solid green;
+    background-color: lightgreen;
+  }
+  
+  .rejected {
+    border: 2px solid red;
+    background-color: pink;
+  }

@@ -41,7 +41,8 @@ const routes: Routes = [
   {path:'washerpackage',component:WasherpageComponent},
   {path:'payment',component:PaymentComponent},
   {path:'order',component:OrderComponent},
-  {path:'sample',component:SampleComponent}
+  {path:'sample',component:SampleComponent},
+  {path:'carservice',component:CarserviceComponent}
 
 ];
 

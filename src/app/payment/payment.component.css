@@ -1,24 +1,94 @@
-/* payment-form.component.css */
-.container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f0f0f0;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
+
+/* Add borders and spacing to the form elements */
+
+.body
+{
+  background-image: url(../../assets/img/blog-2.jpg);
+  background-repeat: no-repeat;
+  background-size:cover ;
+}
+
+.payment-form {
   
-  h1, h2 {
-    text-align: center;
-  }
+  border: 5px solid #cccccc0a;
+  border: none;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 380px;
+  margin: 0 auto;
+  box-shadow: #333;
+ 
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Center the button */
+.btn-block {
+  display: block;
+  width: 70%;
+}
+
+/* Additional styles for a better appearance (optional) */
+.payment-form-container {
+
   
-  form {
-    margin-top: 20px;
-    margin-bottom: 5px;
-  }
-  
-  input[type="submit"] {
-    display: block;
-    margin: 20px auto 0;
-  }
-  
+
+  border: 15px solid #cccccc0a;
+  background-color: #cccccc;
+  box-shadow: #00d5ff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 380px;
+  margin: 0 auto;
+  background-color:  #ccccccd5;
+  margin-top: 10px;
+}
+
+.payment-form-container h1 {
+  border: 5px solid #cccccc96;
+  color: #333;
+}
+
+.payment-form select,
+.payment-form input {
+  width: 100%;
+  padding-bottom: 7px;
+  border: none; /* Remove the default border */
+  border-bottom: 1px solid #cccccc00; /* Add only a bottom border */
+  background-color: white; /* Optional: Transparent background */
+}
+
+/* Apply focus styles */
+.payment-form select:focus,
+.payment-form input:focus {
+
+  outline: none; /* widthRemove the focus outline */
+  border-bottom: 2px solid #007bff; /* Add a focus border */
+}
+
+.payment-form button {
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  border: none; /* Remove the default button border */
+  border-radius: 5px;
+}
+
+.payment-form button:hover {
+  background-color: #0056b3;
+ 
+}
+
+.payment-form-container {
+  margin-top: 10px;
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 20px;
+  border-radius: 3px;
+  border:1px solid #cccccc2c;
+  box-shadow: black;
+}
+
+

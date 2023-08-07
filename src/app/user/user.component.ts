@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { signupModel } from '../Models/signupModel';
 import { UserService } from '../Services/user.service';
 import { Router } from '@angular/router';
@@ -8,35 +8,32 @@ import { Router } from '@angular/router';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent {
+export class UserComponent implements OnInit {
 
-  users:signupModel[]=[];
+  customers: signupModel[] = [];
+  washers: signupModel[] = [];
 
-  constructor(private userservice:UserService,private router:Router){}
+  constructor(private userService: UserService, private router: Router) {}
 
-  ngOnInit(){
-    this.userservice.getAllUser()
-    .subscribe({
-      next:(users) =>{
-       this.users=users;
-       console.log(users);
+  ngOnInit() {
+    this.userService.getAllUser().subscribe({
+      next: (users) => {
+        this.customers = users.filter(user => user.role === 'Customer');
+        this.washers = users.filter(user => user.role === 'Washer');
       },
-      error:(response) =>{
+      error: (response) => {
         console.log(response);
       }
-    })
-  }
-
-  deleteuser(id?:number){
-    this.userservice.deleteUser(id)
-    .subscribe({
-      next:(response)=>{
-        this.router.navigate(['/user-list']);
-      }
-
     });
   }
 
-  userRole:string="";
+  deleteuser(id?: number) {
+    this.userService.deleteUser(id).subscribe({
+      next: (response) => {
+        this.router.navigate(['/user-list']);
+        this.userService.getAllUser();
+      }
+    });
+  }
 
 }

@@ -9,7 +9,7 @@ export interface addon{
 export interface order{
 
 
-    id?:number, 
+    id?:number|undefined, 
     name: string,
     scheduledatetime:Date,
     pickUpPoint: string,
@@ -17,4 +17,6 @@ export interface order{
     carModel:string,
     carNumber:string,
     userId:string
+    washingStatus:string
+    washerId:string
 }

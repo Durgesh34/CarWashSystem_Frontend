@@ -52,12 +52,12 @@ export class LoginComponent {
              this.route.navigate(['/home']); 
           }
 
-          this.alertService.show('Login successful!', '#4CAF50', 1500);
+          this.alertService.show('Login successful!', '#4CAF50', 2500);
 
       },
       error:(err)=>{
         console.log(err.error);
-        this.alertService.show('Login failed: ' + 'Enter Valid Details', 'red', 1500);
+        this.alertService.show('Login failed: ' + 'Enter Valid Details', 'red', 2500);
       }
     })
   }

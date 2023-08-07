@@ -1,27 +1,55 @@
+/* The navigation bar styles for screens wider than 768px */
+.nav {
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1E3C72;
+  padding: 10px;
+  color: white;
+  font-size: 18px;
+}
 
-    .nav {
-        height: 100px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #1E3C72;
-        padding: 10px;
-        color: white;
-        font-size: 18px;
-      }
-    
-      /* Style the navigation links */
-      .nav a {
-        color: white;
-        text-decoration: none;
-        padding: 10px;
-      }
-      .nav a:hover {
-        background-color: #2A5298;
-      }
-      img{
-       height: 80px;
-      }
-    
-    
-    
+/* Style the navigation links */
+.nav a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+}
+.nav a:hover {
+  background-color: #2A5298;
+}
+img {
+  height: 80px;
+}
+span {
+  color: bisque;
+  font-size: 24px;
+}
+
+/* Media query for screens 768px and below */
+@media screen and (max-width: 768px) {
+  .nav {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+  }
+
+  .nav div {
+    margin-bottom: 10px;
+  }
+
+  img {
+    height: 60px;
+    margin-bottom: 10px;
+  }
+
+  .nav a {
+    display: block;
+    padding: 5px;
+  }
+
+  span {
+    font-size: 20px;
+  }
+}

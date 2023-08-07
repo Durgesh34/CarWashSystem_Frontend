@@ -4,6 +4,7 @@ import { TotalAmountService } from '../Services/TotalAmount.service';
 import { HttpClient } from '@angular/common/http';
 import { PaymentService } from '../Services/payment.service';
 import { payment } from '../Models/paymentModel';
+import { AlertService } from '../Services/alert.service';
 
 @Component({
   selector: 'cws-payment',
@@ -30,6 +31,7 @@ export class PaymentComponent implements OnInit {
     private signUpService: SignupserviceService,
     private totalAmountService: TotalAmountService,
     private paymentService: PaymentService,
+    private alertService:AlertService,
     private http: HttpClient // Inject HttpClient
   ) {}
 
@@ -53,6 +55,11 @@ export class PaymentComponent implements OnInit {
         console.log("completed")
         // After adding the order, update the orders list
         this.getAllPayments();
+        this.alertService.show('Orderd Placed Successfully!', '#4CAF50', 3000);
+      },
+      error:(err)=>{
+        console.log(err.error);
+        this.alertService.show('Order not Placed ', 'red', 2500);
       }
     })
   }

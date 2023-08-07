@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { SignupserviceService } from '../Services/signupservice.service';
-import { order } from '../Models/addonModel'; // Import only the order interface
+import { order } from '../Models/addonModel';
 import { OrderService } from '../Services/order.service';
 import { TotalAmountService } from '../Services/TotalAmount.service';
 import { Router } from '@angular/router';
@@ -18,10 +17,11 @@ export class OrderComponent {
   addons: order[] = [];
   user = this.signUpService.getUserId();
   name = this.signUpService.getUserName();
+  WasherID=this.signUpService.getUserId();
   isAdmin: boolean = false;
+  isWasher: boolean = false;
 
   addorder: order = {
-    
     name: this.name,
     scheduledatetime: new Date(),
     pickUpPoint: '',
@@ -29,50 +29,51 @@ export class OrderComponent {
     carModel: '',
     carNumber: '',
     userId: this.user,
+    washingStatus: '',
+    washerId:''
+
   };
+
+  selectedOrderIndex: number = -1; // Initialize with -1 to indicate no order selected
 
   constructor(
     private router: Router,
     private signUpService: SignupserviceService,
     private orderservice: OrderService,
     private totalAmountService: TotalAmountService,
-
-    private http: HttpClient // Inject HttpClient
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
     this.totalAmountService.totalAmount$.subscribe((totalAmount) => {
       this.addorder.totalAmount = totalAmount;
 
-      // Get the user's role from AuthService and set the isAdmin variable accordingly
       const userRole = this.signUpService.getUserRoles();
       this.isAdmin = userRole === 'Admin';
-
-      // Call the function to get all orders from the backend API
+      this.isWasher = userRole === 'Washer';
       this.getAllOrders();
     });
   }
 
   Addorder() {
-    
-
-    this.addorder.name = this.name; 
+    this.addorder.name = this.name;
     this.orderservice.Addorder(this.addorder).subscribe({
       next: (response) => {
         console.log(response);
 
         this.totalAmountService.setTotalAmount(this.addorder.totalAmount);
         this.router.navigate(['/payment']);
-        // After adding the order, update the orders list
         this.getAllOrders();
       }
     });
-  }
+  }*//*
 
   getAllOrders() {
-    // Call your OrderService function to get all orders
     this.orderservice.getAllOrder().subscribe((orders) => {
-      this.addons = orders; // Update the addons array with the retrieved orders
+      this.addons = orders;
+      if (this.isWasher) {
+        this.addons = this.addons.filter((order) => order.washingStatus !== 'approved');
+      }
     });
   }
 
@@ -80,7 +81,6 @@ export class OrderComponent {
     this.orderservice.deleteOrder(orderId).subscribe({
       next: (response) => {
         console.log(response);
-        // After deleting the order, update the orders list
         this.getAllOrders();
       },
       error: (error) => {
@@ -88,4 +88,48 @@ export class OrderComponent {
       }
     });
   }
+
+  updateOrderStatus(order: order, index: number) {
+    if (!order) {
+      return; // Exit if order is undefined
+    }
+  
+    this.selectedOrderIndex = index;
+    order.washingStatus = 'approved';
+    order.washerId = this.isWasher ? this.WasherID : ''; // Set washerId to the WasherID if the user is a washer
+  
+    const orderId = order.id?.toString();
+  
+    if (orderId) {
+      this.orderservice.updateOrder(orderId, order).subscribe(() => {
+        // Remove the approved order from the list
+        this.addons.splice(index, 1);
+        this.selectedOrderIndex = -1;
+  
+        // Navigate to the approved orders page
+        
+      });
+    }
+  }
+  
+  rejectOrderStatus(order: order, index: number) {
+    if (!order) {
+      return; // Exit if order is undefined
+    }
+  
+    this.selectedOrderIndex = index;
+    order.washingStatus = 'rejected';
+    order.washerId = this.isWasher ? this.WasherID : ''; // Set washerId to the WasherID if the user is a washer
+  
+    const orderId = order.id?.toString();
+  
+    if (orderId) {
+      this.orderservice.updateOrder(orderId, order).subscribe(() => {
+        // Remove the rejected order from the list
+        this.addons.splice(index, 1);
+        this.selectedOrderIndex = -1;
+      });
+    }
+  }
+  
 }

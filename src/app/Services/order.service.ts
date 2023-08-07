@@ -30,4 +30,9 @@ getAllOrder(): Observable<order[]>{
   deleteOrder(id:number): Observable<order>{
     return this.http.delete<order>(this.basApiUrl + '/api/Order/'+id);
   }
+
+  updateOrder(id:string ,updateOrder:order): Observable<order>{
+    return this.http.put<order>(this.basApiUrl+ '/api/Order/'+id,updateOrder);
+  }
+
 }

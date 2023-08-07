@@ -1,26 +1,66 @@
-<cws-adminpage></cws-adminpage>
+<cws-nav></cws-nav>
 <div class="container my-5">
-
-    <h1 class="mb-3"> Users </h1>
-<table class="table" *ngIf="users && users.length >0">
-<thead>
-    <tr>
+  <u><h1 class="mb-3">List Of Customers</h1></u>
+  <br>
+  <!-- Customers Table -->
+  <table class="table table-striped table-hover" *ngIf="customers && customers.length > 0">
+    <thead class="thead-dark">
+      <tr>
+        <th>Id</th>
         <th>Name</th>
         <th>Email</th>
         <th>Address</th>
         <th>Role</th>
         <th>Actions</th>
-    </tr>
-</thead>
-    <tbody *ngFor="let user of users">
-        <tr *ngIf="user.role=='Customer'">
-            <td> {{user.fullName}} </td>
-            <td> {{user.email}}</td>
-            <td>{{user.address}}</td>
-            <td> {{user.role}}</td>
-            <a type="button" class="btn btn-danger" (click)="deleteuser(user?.id)">Delete</a>
-        </tr>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of customers">
+        <ng-container *ngIf="user.role === 'Customer'">
+          <td>{{user.id}}</td>
+          <td>{{ user.fullName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.address }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+            <a type="button" class="btn btn-danger btn-sm" (click)="deleteuser(user?.id)">Delete</a>
+          </td>
+        </ng-container>
+      </tr>
     </tbody>
-</table>
-<p *ngIf="!users || users.length <=0" class="text-center h3">No Users found</p>
+  </table>
+
+  <br><br><br><br><br>
+
+  <!-- Washers Table -->
+  <u><h1>List Of Washers</h1></u>
+  <br>
+  <table class="table table-striped table-hover mb-10" *ngIf=" washers && washers.length > 0">
+    <thead class="thead-dark">
+      <tr>
+       <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of  washers">
+        <ng-container *ngIf="user.role === 'Washer'">
+          <td>{{user.id}}</td>
+          <td>{{ user.fullName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.address }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+            <a type="button" class="btn btn-danger btn-sm" (click)="deleteuser(user?.id)">Delete</a>
+          </td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="! washers || !customers|| washers.length <= 0 || customers.length <= 0" class="text-center h3">No Users found</p>
 </div>
