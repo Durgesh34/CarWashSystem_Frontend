@@ -7,7 +7,6 @@ import { AdminpageComponent } from './adminpage/adminpage.component';
 import { AboutComponent } from './about/about.component';
 import { LocationComponent } from './location/location.component';
 import { PlansComponent } from './plans/plans.component';
-import { CarserviceComponent } from './carservice/carservice.component';
 import { UserComponent } from './user/user.component';
 import { washPackage } from './Models/washPackage';
 import { WashpackageComponent } from './washpackage/washpackage.component';
@@ -17,7 +16,6 @@ import { ContactComponent } from './contact/contact.component';
 import { WasherpageComponent } from './washerpage/washerpage.component';
 import { PaymentComponent } from './payment/payment.component';
 import { OrderComponent } from './order/order.component';
-import { SampleComponent } from './sample/sample.component';
 import { OrderdisplayComponent } from './orderdisplay/orderdisplay.component';
 
 
@@ -30,7 +28,7 @@ const routes: Routes = [
   {path:'about',component:AboutComponent},
   {path:'washing-points',component:LocationComponent},
   {path:'plans',component:PlansComponent},
-  {path:'services',component:CarserviceComponent},
+  // {path:'services',component:CarserviceComponent},
   {path:'admin-page',component:AdminpageComponent},
   {path:'user-list',component:UserComponent},
   {path:'wash-package',component:WashpackageComponent},
@@ -42,8 +40,7 @@ const routes: Routes = [
   {path:'washerpackage',component:WasherpageComponent},
   {path:'payment',component:PaymentComponent},
   {path:'order',component:OrderComponent},
-  {path:'sample',component:SampleComponent},
-  {path:'carservice',component:CarserviceComponent},
+
   {path:'orderdisplay',component:OrderdisplayComponent}
 
 ];

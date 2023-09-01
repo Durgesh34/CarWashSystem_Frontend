@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SignupserviceService } from '../Services/signupservice.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { statusModel } from '../Models/statusModel';
@@ -11,8 +11,8 @@ import { AlertService } from '../Services/alert.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-
+export class LoginComponent implements  OnInit {
+  loginForm: FormGroup;
   loginUser:loginModel={
     email:'',
     password:''
@@ -25,7 +25,12 @@ export class LoginComponent {
 
     
     )
-    { }
+    { {
+      this.loginForm = this.fb.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', Validators.required]
+      });
+    }}
 
   
   role="";
@@ -64,7 +69,13 @@ export class LoginComponent {
 
 }
 
+
+
 ngOnInit(){
+  this.loginForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required]
+  });
   if(this.signUpService.isLoggedIn()){
     this.route.navigate(['/home'])
   }

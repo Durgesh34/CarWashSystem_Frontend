@@ -1,8 +1,19 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 
+export function validEmailPattern(emailRe: RegExp): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+      const valid = emailRe.test(control.value);
+      return valid ? null : { invalidEmailPattern: true };
+  };
+}
+
+
 export function validPattern(nameRe: RegExp): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      const valid = nameRe.test(control.value);
-      return valid ? null : {invalidPattern: true};
+        const valid = nameRe.test(control.value);
+        return valid ? null : { invalidPattern: true };
     };
-  }
+
+    
+}
+

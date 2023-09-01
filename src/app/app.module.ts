@@ -17,7 +17,6 @@ import { AdminpageComponent } from './adminpage/adminpage.component';
 import { WasherpageComponent } from './washerpage/washerpage.component';
 import {HttpClientModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CarserviceComponent } from './carservice/carservice.component';
 import { UserComponent } from './user/user.component';
 import { WashpackageComponent } from './washpackage/washpackage.component';
 import { AddonComponent } from './addon/addon.component';
@@ -25,7 +24,6 @@ import { EditwashpackageComponent } from './editwashpackage/editwashpackage.comp
 import { EditaddonComponent } from './editaddon/editaddon.component';
 import { Animation1Component } from './animation/animation1/animation1.component';
 import { ContactComponent } from './contact/contact.component';
-import { SampleComponent } from './sample/sample.component';
 import { PaymentComponent } from './payment/payment.component';
 import { OrderComponent } from './order/order.component';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
@@ -46,7 +44,7 @@ import { OrderdisplayComponent } from './orderdisplay/orderdisplay.component';
     SignupComponent,
     AdminpageComponent,
     WasherpageComponent,
-    CarserviceComponent,
+   
     UserComponent,
     WashpackageComponent,
     AddonComponent,
@@ -54,7 +52,7 @@ import { OrderdisplayComponent } from './orderdisplay/orderdisplay.component';
     EditaddonComponent,
     Animation1Component,
     ContactComponent,
-    SampleComponent,
+  
     PaymentComponent,
     OrderComponent,
     OrderdisplayComponent,

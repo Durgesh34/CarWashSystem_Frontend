@@ -39,16 +39,18 @@ export class SignupComponent implements OnInit {
      }
     })
   }
-  ngOnInit():void{
-    const patternRegex= new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[#$^+=!*()@%&]).{6,}$');
-     // must be atleast 6 character long,must contain 1 uppercase, 1 lowercase, 1 digit and 1 special character
-    this.frm= this.fb.group({
-      'fullName': ['',Validators.required],
-      'email': ['',Validators.required],
-      'password': ['',[Validators.required,validPattern(patternRegex)]],
-      'address': ['',Validators.required],
-      'role': ['',Validators.required]
-    })
-  }
+  ngOnInit(): void {
+    const passwordPatternRegex = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[#$^+=!*()@%&]).{6,}$');
+    const emailPatternRegex = new RegExp('^.+@gmail.com$'); // Checks if email ends with "@gmail.com"
+
+    this.frm = this.fb.group({
+        'fullName': ['', Validators.required],
+        'email': ['', [Validators.required, validPattern( emailPatternRegex)]],
+        'password': ['', [Validators.required, validPattern(passwordPatternRegex)]],
+        'address': ['', Validators.required],
+        'role': ['', Validators.required]
+    });
+}
+
  
 }

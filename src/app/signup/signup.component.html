@@ -21,6 +21,10 @@
       <div class="msg error" *ngIf="f['email'].invalid && (f['email'].dirty || f['email'].touched)">
         <span *ngIf="f['email'].errors?.['required']">
           Email is required
+          
+        </span>
+        <span *ngIf="f['email'].errors?.['invalidPattern']">
+          And Must be valid email
         </span>
       </div>
 
