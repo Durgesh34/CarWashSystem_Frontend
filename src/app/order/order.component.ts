@@ -6,6 +6,9 @@ import { order } from '../Models/addonModel';
 import { OrderService } from '../Services/order.service';
 import { TotalAmountService } from '../Services/TotalAmount.service';
 import { Router } from '@angular/router';
+import { ValidationService } from '../Services/validation.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EmaiService } from '../Services/emai.service';
 
 @Component({
   selector: 'cws-order',
@@ -20,6 +23,7 @@ export class OrderComponent {
   WasherID=this.signUpService.getUserId();
   isAdmin: boolean = false;
   isWasher: boolean = false;
+  form!: FormGroup  // Add the form group
 
   addorder: order = {
     name: this.name,
@@ -41,10 +45,14 @@ export class OrderComponent {
     private signUpService: SignupserviceService,
     private orderservice: OrderService,
     private totalAmountService: TotalAmountService,
-    private http: HttpClient
+    private http: HttpClient,
+    private validationService: ValidationService, // Inject the ValidationService
+    private formBuilder: FormBuilder,
+    private emailService: EmaiService 
   ) {}
 
   ngOnInit() {
+    this.initializeForm();
     this.totalAmountService.totalAmount$.subscribe((totalAmount) => {
       this.addorder.totalAmount = totalAmount;
 
@@ -55,18 +63,34 @@ export class OrderComponent {
     });
   }
 
-  Addorder() {
-    this.addorder.name = this.name;
-    this.orderservice.Addorder(this.addorder).subscribe({
-      next: (response) => {
-        console.log(response);
+ // Inside the initializeForm() method
+ initializeForm() {
+  this.form = this.formBuilder.group({
+    carModel: ['', [Validators.required, this.validationService.validateCarModel]],
+    carNumber: ['', [Validators.required, this.validationService.validateCarNumber]],
+    pickupPoint: ['', [Validators.required, this.validationService.validatePickupPoint]]
+  });
+}
 
-        this.totalAmountService.setTotalAmount(this.addorder.totalAmount);
-        this.router.navigate(['/payment']);
-        this.getAllOrders();
-      }
-    });
-  }*//*
+
+Addorder() {
+  
+
+  this.addorder.name = this.name;
+  this.orderservice.Addorder(this.addorder).subscribe({
+    next: (response) => {
+      console.log(response);
+
+      this.totalAmountService.setTotalAmount(this.addorder.totalAmount);
+      this.router.navigate(['/payment']);
+
+      this.getAllOrders();
+    }
+  });
+}
+
+
+ 
 
   getAllOrders() {
     this.orderservice.getAllOrder().subscribe((orders) => {
@@ -76,6 +100,10 @@ export class OrderComponent {
       }
     });
   }
+
+ 
+    
+  
 
   deleteOrder(orderId: number) {
     this.orderservice.deleteOrder(orderId).subscribe({
@@ -132,4 +160,22 @@ export class OrderComponent {
     }
   }
   
+
+  //email:
+
+
+  sendEmailForOrder(orderId: number) {
+    this.emailService.sendOrderConfirmationEmail(orderId).subscribe(
+      (response) => {
+        console.log('Email sent successfully!', response);
+        // You can display a success message or perform other actions here
+      },
+      (error) => {
+        console.error('Error sending email:', error);
+        // Handle error, display error message, etc.
+      }
+    );
+  }
+
+
 }

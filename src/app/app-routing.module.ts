@@ -18,6 +18,7 @@ import { WasherpageComponent } from './washerpage/washerpage.component';
 import { PaymentComponent } from './payment/payment.component';
 import { OrderComponent } from './order/order.component';
 import { SampleComponent } from './sample/sample.component';
+import { OrderdisplayComponent } from './orderdisplay/orderdisplay.component';
 
 
 const routes: Routes = [
@@ -42,7 +43,8 @@ const routes: Routes = [
   {path:'payment',component:PaymentComponent},
   {path:'order',component:OrderComponent},
   {path:'sample',component:SampleComponent},
-  {path:'carservice',component:CarserviceComponent}
+  {path:'carservice',component:CarserviceComponent},
+  {path:'orderdisplay',component:OrderdisplayComponent}
 
 ];
 

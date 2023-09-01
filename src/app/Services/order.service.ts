@@ -1,7 +1,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {  order } from '../Models/addonModel';
 
@@ -33,6 +33,11 @@ getAllOrder(): Observable<order[]>{
 
   updateOrder(id:string ,updateOrder:order): Observable<order>{
     return this.http.put<order>(this.basApiUrl+ '/api/Order/'+id,updateOrder);
+  }
+
+  getOrdersByUserId(userId: number): Observable<order[]> {
+    
+    return this.http.get<order []>(this.basApiUrl+'/api/Order/user/'+userId);
   }
 
 }

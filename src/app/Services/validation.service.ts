@@ -14,7 +14,7 @@ export class ValidationService {
   }
 
   validateCarNumber(carNumber: string): boolean {
-    const pattern = /^[A-Za-z0-9]{6,10}$/;
+    const pattern = /^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$/;
     return pattern.test(carNumber);
   }
 

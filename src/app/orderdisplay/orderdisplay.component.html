@@ -1,0 +1,47 @@
+
+<cws-nav></cws-nav>
+
+<div class="container text-center mt-5">
+  <button class="btn btn-primary" *ngIf="sign.isLoggedIn()" (click)="toggleUserOrders()">Show Orders</button>
+  <div *ngIf="!showUserOrders">
+    <h4>Welcome to Our Car Wash Service</h4>
+    <p>Click the "Show Orders" button to view your car wash orders.</p>
+    <img src="../../assets/img/carousel-1.jpg" alt="Car Wash Image" class="img-fluid mt-4" style="max-width: 400px;">
+  </div>
+</div>
+
+<table *ngIf="showUserOrders" class="table table-striped table-bordered">
+  <!-- ... Your table code remains the same ... -->
+</table>
+<table *ngIf="showUserOrders" class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Car Model</th>
+      <th>Car Number</th>
+      <th>Total Amount</th>
+      <th>Scheduled Date</th>
+      <th>Washing Status</th>
+      <!-- Add more headers for additional order details -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of userOrders">
+      <!-- Filter orders based on washingStatus -->
+      <ng-container *ngIf="order.washingStatus === 'approved' || order.washingStatus === 'Pending'">
+        <td>{{ order.carModel }}</td>
+        <td>{{ order.carNumber }}</td>
+        <td>{{ order.totalAmount }}</td>
+        <td>{{ order.scheduledatetime | date:'dd/MM/yyyy  ' }}</td>
+        <td>
+          <span class="badge badge-{{ order.washingStatus === 'approved' ? 'success' : 'warning' }}">
+            {{ order.washingStatus }}
+          </span>
+        </td>
+        <!-- Add more columns for additional order details -->
+      </ng-container>
+    </tr>
+  </tbody>
+</table>
+
+
+

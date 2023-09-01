@@ -63,3 +63,22 @@
     border: 2px solid red;
     background-color: pink;
   }
+
+  /* Custom CSS classes for different status */
+.custom-badge-pending {
+  background-color: #ffc107; /* Yellow for pending */
+  color: #333;
+  padding: 7px;
+}
+
+.custom-badge-approved {
+  background-color: #28a745; /* Green for approved */
+  color: #fff;
+  padding: 7px;
+}
+
+.custom-badge-rejected {
+  background-color: #dc3545; /* Red for rejected */
+  color: #fff;
+  padding: 7px;
+}

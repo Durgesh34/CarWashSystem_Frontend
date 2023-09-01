@@ -31,6 +31,7 @@ import { OrderComponent } from './order/order.component';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { OrderdisplayComponent } from './orderdisplay/orderdisplay.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +57,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
     SampleComponent,
     PaymentComponent,
     OrderComponent,
+    OrderdisplayComponent,
     
   ],
   imports: [
